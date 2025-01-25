@@ -2,11 +2,12 @@ from django.contrib import admin  # Use Django's admin module
 from django.urls import path, include
 from rest_framework import routers
 from swelocaltoursapi.views.auth import check_user, register_user  # Import functions directly
-from swelocaltoursapi.views import LocationView
+from swelocaltoursapi.views import LocationView, ItineraryView
 
 # Initialize router
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'locations', LocationView, 'location')
+router.register(r'itineraries', ItineraryView, 'itinerary')
 
 # Define URL patterns
 urlpatterns = [
