@@ -1,0 +1,12 @@
+[
+    {
+        "model": "swelocaltoursapi.location",
+        "pk": 1,
+        "fields": {
+            "name": "Shelby Park",
+            "address": "Shelby Ave & S 20th St, Nashville, TN 37206"
+        }
+    }
+    
+
+]
