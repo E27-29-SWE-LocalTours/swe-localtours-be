@@ -5,7 +5,6 @@ from rest_framework import serializers, status
 from swelocaltoursapi.models import Tour, Location, User
 
 
-
 # ViewSet
 class TourView(ViewSet):
     def retrieve(self, request, pk):

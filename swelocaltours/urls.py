@@ -7,6 +7,7 @@ from swelocaltoursapi.views import LocationView, ItineraryView, TourView
 # Initialize router
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'locations', LocationView, 'location')
+router.register(r'itineraries', ItineraryView, 'itinerary')
 router.register(r'tours', TourView, 'tour')
 
 # Define URL patterns
