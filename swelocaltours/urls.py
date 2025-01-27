@@ -2,7 +2,7 @@ from django.contrib import admin  # Use Django's admin module
 from django.urls import path, include
 from rest_framework import routers
 from swelocaltoursapi.views.auth import check_user, register_user  # Import functions directly
-from swelocaltoursapi.views import LocationView, TourView
+from swelocaltoursapi.views import LocationView, ItineraryView, TourView
 
 # Initialize router
 router = routers.DefaultRouter(trailing_slash=False)
