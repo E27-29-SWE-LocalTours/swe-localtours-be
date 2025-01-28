@@ -1,0 +1,32 @@
+[
+  {
+      "model": "swelocaltoursapi.user",
+      "pk": 1,
+      "fields": {
+          "first_name": "John",
+          "last_name": "Doe",
+          "bio": "Adventurer and tour enthusiast.",
+          "uid": "user123"
+      }
+  },
+  {
+      "model": "swelocaltoursapi.user",
+      "pk": 2,
+      "fields": {
+          "first_name": "Jane",
+          "last_name": "Smith",
+          "bio": "Lover of travel and exploring hidden gems.",
+          "uid": "user456"
+      }
+  },
+  {
+      "model": "swelocaltoursapi.user",
+      "pk": 3,
+      "fields": {
+          "first_name": "Alice",
+          "last_name": "Johnson",
+          "bio": "Tour guide with years of experience.",
+          "uid": "user789"
+      }
+  }
+]
