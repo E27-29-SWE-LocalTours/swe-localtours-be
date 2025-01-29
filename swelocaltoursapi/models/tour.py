@@ -13,8 +13,8 @@ class Tour(models.Model):
  location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='tours')
  name = models.CharField(max_length=50)
  description = models.CharField(max_length=280)
- date = models.CharField(max_length=50)
- time = models.CharField(max_length=50)
+ date = models.DateField()
+ time = models.TimeField()
  duration = models.IntegerField(default=60)  # Store duration in minutes (60 for 1 hour)
 
  
