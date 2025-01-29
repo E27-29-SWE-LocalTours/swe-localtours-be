@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from .location import Location
 from .user import User
-from datetime import timedelta, time
+
 
 
 class Tour(models.Model):
