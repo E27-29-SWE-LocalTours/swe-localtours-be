@@ -37,7 +37,10 @@ class TourView(ViewSet):
                 location=location,
                 name=request.data["name"],
                 description=request.data["description"],
-                date=request.data["date"]
+                date=request.data["date"],
+                time=request.data["time"],
+                duration=request.data["duration"]
+            
             )
             serializer = TourSerializer(tour)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -61,6 +64,9 @@ class TourView(ViewSet):
             tour.name = request.data["name"]
             tour.description = request.data["description"]
             tour.date = request.data["date"]
+            tour.time = request.data["time"]
+            tour.duration = request.data["duration"]
+            
 
             tour.save()
             serializer = TourSerializer(tour)
@@ -82,9 +88,9 @@ class TourView(ViewSet):
 class TourSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tour
-        fields = ('id', 'user_id', 'image', 'price', 'location', 'name', 'description', 'date')
+        fields = ('id', 'user_id', 'image', 'price', 'location', 'name', 'description', 'date', 'time', 'duration')
 
 class SingleTourSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tour
-        fields = ('id', 'user_id', 'image', 'price', 'location', 'name', 'description', 'date')
+        fields = ('id', 'user_id', 'image', 'price', 'location', 'name', 'description', 'date', 'time', 'duration')

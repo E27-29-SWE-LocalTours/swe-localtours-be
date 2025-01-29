@@ -2,6 +2,8 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from .location import Location
 from .user import User
+from datetime import timedelta, time
+
 
 class Tour(models.Model):
  
@@ -12,5 +14,7 @@ class Tour(models.Model):
  name = models.CharField(max_length=50)
  description = models.CharField(max_length=280)
  date = models.DateField()
+ time = models.TimeField(default=time(12, 0))
+ duration = models.DurationField(default=timedelta(hours=1))
 
  
