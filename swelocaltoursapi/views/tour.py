@@ -18,7 +18,11 @@ class TourView(ViewSet):
 
     def list(self, request):
         """Handle GET requests for all tours"""
+        location_id = request.query_params.get('location', None)
         tours = Tour.objects.all()
+        
+        if location_id:
+            tours = tours.filter(location_id=location_id)
         serializer = TourSerializer(tours, many=True)
         return Response(serializer.data)
 
