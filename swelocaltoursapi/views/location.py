@@ -16,7 +16,7 @@ class SingleLocationSerializer(serializers.ModelSerializer):
 
 class LocationView(ViewSet):
     def retrieve(self, request, pk):
-        uid = request.query_params.get('uid', None)
+        
         try:
             location = Location.objects.get(pk=pk)
             
@@ -26,7 +26,14 @@ class LocationView(ViewSet):
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
         
     def list(self, request):
+        uid = request.query_params.get('uid', None)
         locations = Location.objects.all()
+        
+        if uid:
+            uid = request.query_params.get('uid', None)
+            locations = locations.filter(uid=uid)
+        serializer = LocationSerializer(locations, many=True)
+        return Response(serializer.data)
         serializer = LocationSerializer(locations, many=True)  
         return Response(serializer.data)  
     
