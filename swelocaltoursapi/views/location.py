@@ -7,15 +7,16 @@ from swelocaltoursapi.models import Location
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ('id', 'name', 'address')
+        fields = ('id', 'name', 'address', 'uid')
 
 class SingleLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ('id', 'name', 'address')
+        fields = ('id', 'name', 'address', 'uid')
 
 class LocationView(ViewSet):
     def retrieve(self, request, pk):
+        uid = request.query_params.get('uid', None)
         try:
             location = Location.objects.get(pk=pk)
             
@@ -32,7 +33,8 @@ class LocationView(ViewSet):
     def create(self, request):
         location = Location.objects.create(
             name=request.data["name"],
-            address=request.data["address"]
+            address=request.data["address"],
+            uid=request.data["uid"]
         )
         
         serializer = LocationSerializer(location)
@@ -45,6 +47,7 @@ class LocationView(ViewSet):
             
             location.name = request.data["name"]
             location.address = request.data["address"]
+            location.uid = request.data["uid"]
             
             location.save()
             serializer = LocationSerializer(location)
@@ -60,7 +63,7 @@ class LocationView(ViewSet):
             location.delete()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except Location.DoesNotExist:
-            return Response({'message': 'Author not found'}, status=status.HTTP_404_NOT_FOUND)    
+            return Response({'message': 'Location not found'}, status=status.HTTP_404_NOT_FOUND)    
             
             
         
