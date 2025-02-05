@@ -26,7 +26,7 @@ class TourView(ViewSet):
             tours = tours.filter(location_id=location_id)
             
         if uid:
-         tours = tours.filter(user_id__uid=uid)      
+         tours = tours.filter(uid=uid)     
         serializer = TourSerializer(tours, many=True)
         return Response(serializer.data)
 
@@ -35,11 +35,13 @@ class TourView(ViewSet):
         try:
             # Fetch related models
             user = User.objects.get(pk=request.data["user_id"])
+            # uid_user = User.objects.get(uid=request.data["uid"])
             location = Location.objects.get(pk=request.data["location"])
 
             # Create the Tour instance
             tour = Tour.objects.create(
                 user_id=user,
+                uid=request.data["uid"],
                 image=request.data["image"],
                 price=request.data["price"],
                 location=location,
@@ -64,9 +66,11 @@ class TourView(ViewSet):
         """Handle PUT requests to update an existing tour"""
         try:
             tour = Tour.objects.get(pk=pk)
+            uid_user = User.objects.get(uid=request.data["uid"])
             location = Location.objects.get(pk=request.data["location"])
 
             # Update fields
+            tour.uid = uid_user,
             tour.image = request.data["image"]
             tour.price = request.data["price"]
             tour.location = location

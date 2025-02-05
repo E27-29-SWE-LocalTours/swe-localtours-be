@@ -4,10 +4,9 @@ from .location import Location
 from .user import User
 
 
-
 class Tour(models.Model):
  
- user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tours')
+ user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tours_created')
  image = models.URLField()
  price = models.DecimalField(max_digits=9, decimal_places=2, validators=[MinValueValidator(0.00)])
  location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='tours')
@@ -16,5 +15,4 @@ class Tour(models.Model):
  date = models.DateField()
  time = models.TimeField()
  duration = models.IntegerField(default=60)  # Store duration in minutes (60 for 1 hour)
- uid = models.CharField(max_length=50)
- 
+ uid = models.CharField(max_length=50) 
