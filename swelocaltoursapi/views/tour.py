@@ -19,10 +19,14 @@ class TourView(ViewSet):
     def list(self, request):
         """Handle GET requests for all tours"""
         location_id = request.query_params.get('location', None)
+        uid = request.query_params.get('uid', None) 
         tours = Tour.objects.all()
         
         if location_id:
             tours = tours.filter(location_id=location_id)
+            
+        if uid:
+         tours = tours.filter(user_id__uid=uid)      
         serializer = TourSerializer(tours, many=True)
         return Response(serializer.data)
 
@@ -92,9 +96,9 @@ class TourView(ViewSet):
 class TourSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tour
-        fields = ('id', 'user_id', 'image', 'price', 'location', 'name', 'description', 'date', 'time', 'duration')
+        fields = ('id', 'user_id', 'image', 'price', 'location', 'name', 'description', 'date', 'time', 'duration', 'uid')
 
 class SingleTourSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tour
-        fields = ('id', 'user_id', 'image', 'price', 'location', 'name', 'description', 'date', 'time', 'duration')
+        fields = ('id', 'user_id', 'image', 'price', 'location', 'name', 'description', 'date', 'time', 'duration', 'uid')
