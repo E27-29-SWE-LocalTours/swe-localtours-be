@@ -21,10 +21,16 @@ class UserView(ViewSet):
 
     def list(self, request):
         """Handle GET requests to get all users"""
-
+        uid = request.query_params.get('uid', None)
         users = User.objects.all()
+
+        if uid:
+            
+            users = users.filter(uid=uid)
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
+        serializer = UserSerializer(locations, many=True)  
+        return Response(serializer.data) 
 
     def create(self, request):
         """Handle POST operations"""

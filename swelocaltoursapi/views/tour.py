@@ -48,6 +48,7 @@ class TourView(ViewSet):
                 date=request.data["date"],
                 time=request.data["time"],
                 duration=request.data["duration"]
+                
             
             )
             serializer = TourSerializer(tour)
