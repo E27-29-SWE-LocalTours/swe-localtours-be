@@ -66,11 +66,11 @@ class TourView(ViewSet):
         """Handle PUT requests to update an existing tour"""
         try:
             tour = Tour.objects.get(pk=pk)
-            uid_user = User.objects.get(uid=request.data["uid"])
+            # uid_user = User.objects.get(uid=request.data["uid"])
             location = Location.objects.get(pk=request.data["location"])
 
             # Update fields
-            tour.uid = uid_user,
+            tour.uid = request.data["uid"]
             tour.image = request.data["image"]
             tour.price = request.data["price"]
             tour.location = location
