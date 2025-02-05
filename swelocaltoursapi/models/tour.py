@@ -16,5 +16,5 @@ class Tour(models.Model):
  date = models.DateField()
  time = models.TimeField()
  duration = models.IntegerField(default=60)  # Store duration in minutes (60 for 1 hour)
-
+ uid = models.CharField(max_length=50)
  
