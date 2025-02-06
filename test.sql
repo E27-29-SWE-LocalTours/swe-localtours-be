@@ -1,2 +1,2 @@
-SELECT FROM * swelocaltoursapi_itinerary
+SELECT * FROM  swelocaltoursapi_itinerary;
 

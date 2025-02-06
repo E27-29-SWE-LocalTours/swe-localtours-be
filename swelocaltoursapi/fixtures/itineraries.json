@@ -3,7 +3,7 @@
         "model": "swelocaltoursapi.itinerary",
         "pk": 1,
         "fields": {
-            "user": "1",
+            "user_id": "1",
             "tour": "1",
             "completed": false
         }
