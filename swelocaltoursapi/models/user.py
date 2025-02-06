@@ -7,4 +7,3 @@ class User(models.Model):
   bio = models.CharField(max_length=280)
   uid = models.CharField(max_length=50)
   
-

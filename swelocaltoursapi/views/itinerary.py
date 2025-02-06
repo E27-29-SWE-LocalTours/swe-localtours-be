@@ -7,12 +7,12 @@ from swelocaltoursapi.models import Itinerary, Tour, User
 class ItinerarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Itinerary
-        fields = ('id', 'user', 'tour', 'completed')
+        fields = ('id', 'user_id', 'tour', 'completed')
 
 class SingleItinerarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Itinerary
-        fields = ('id', 'user', 'tour', 'completed')
+        fields = ('id', 'user_id', 'tour', 'completed')
 
 class ItineraryView(ViewSet):
     def retrieve(self, request, pk):
@@ -20,8 +20,8 @@ class ItineraryView(ViewSet):
             itinerary = Itinerary.objects.get(pk=pk)
             serializer = SingleItinerarySerializer(itinerary)
             return Response(serializer.data)
-        except Itinerary.DoesNotExist as ex:
-            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+        except Itinerary.DoesNotExist:
+            return Response({'message': 'Itinerary not found'}, status=status.HTTP_404_NOT_FOUND)
         
     def list(self, request):
         itineraries = Itinerary.objects.all()
@@ -31,10 +31,10 @@ class ItineraryView(ViewSet):
     def create(self, request):
         try:
             user = User.objects.get(pk=request.data["user_id"])
-            tour = Tour.objects.get(pk=request.data["tour_id"])
+            tour = Tour.objects.get(pk=request.data["tour"])
             
             itinerary = Itinerary.objects.create(
-                user=user,
+                user_id=user,
                 tour=tour,
                 completed=request.data.get("completed", False)
             )
@@ -49,9 +49,9 @@ class ItineraryView(ViewSet):
             itinerary = Itinerary.objects.get(pk=pk)
             
             user = User.objects.get(pk=request.data["user_id"])
-            tour = Tour.objects.get(pk=request.data["tour_id"])
+            tour = Tour.objects.get(pk=request.data["tour"])
             
-            itinerary.user = user
+            itinerary.user_id = user
             itinerary.tour = tour
             itinerary.completed = request.data.get("completed", itinerary.completed)
             
