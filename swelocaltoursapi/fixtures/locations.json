@@ -5,6 +5,7 @@
         "fields": {
             "name": "Shelby Park",
             "address": "Shelby Ave & S 20th St, Nashville, TN 37206",
+            "coordinates": {"latitude": 51.7756934, "longitude": 19.4659261},
             "uid": "sp13"
         }
     }

@@ -7,12 +7,12 @@ from swelocaltoursapi.models import Location
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ('id', 'name', 'address', 'uid')
+        fields = ('id', 'name', 'address', 'coordinates', 'uid')
 
 class SingleLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ('id', 'name', 'address', 'uid')
+        fields = ('id', 'name', 'address', 'coordinates', 'uid')
 
 class LocationView(ViewSet):
     def retrieve(self, request, pk):
@@ -41,6 +41,7 @@ class LocationView(ViewSet):
         location = Location.objects.create(
             name=request.data["name"],
             address=request.data["address"],
+            coordinates=request.data["coordinates"],
             uid=request.data["uid"]
         )
         
@@ -54,6 +55,7 @@ class LocationView(ViewSet):
             
             location.name = request.data["name"]
             location.address = request.data["address"]
+            location.coordinates = request.data["coordinates"]
             location.uid = request.data["uid"]
             
             location.save()
