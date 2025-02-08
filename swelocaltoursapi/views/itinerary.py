@@ -24,7 +24,18 @@ class ItineraryView(ViewSet):
             return Response({'message': 'Itinerary not found'}, status=status.HTTP_404_NOT_FOUND)
         
     def list(self, request):
+        
+        location_id = request.query_params.get('location_id', None)
+        completed = request.query_params.get('completed', None)
+        
         itineraries = Itinerary.objects.all()
+        
+        if location_id:
+            itineraries = itineraries.filter(tour__location_id=location_id)
+            
+        if completed is not None:
+            itineraries = itineraries.filter(completed=completed.lower() == 'true')
+
         serializer = ItinerarySerializer(itineraries, many=True)  
         return Response(serializer.data)  
     
