@@ -5,31 +5,32 @@ from rest_framework import serializers, status
 from swelocaltoursapi.models import Itinerary, Tour, Location, User
 
 
-# Tour Serializer (for embedding tour details in the Itinerary response)
+
 class TourSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tour
         fields = ('id', 'name', 'date', 'time', 'price')
 
 
-# Location Serializer (for embedding location details in the Tour response)
+
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
         fields = ('id', 'name', 'address', 'coordinates')
 
 
-# Itinerary Serializer (used for listing itineraries, including associated tours and locations)
+
 class ItinerarySerializer(serializers.ModelSerializer):
     tour = TourSerializer()  # Include tour details
+    location = LocationSerializer(source='tour.location')
     completed = serializers.BooleanField()
 
     class Meta:
         model = Itinerary
-        fields = ('id', 'user_id', 'tour', 'completed')
+        fields = ('id', 'user_id', 'tour', 'location', 'completed')
 
 
-# Single Itinerary Serializer (for retrieving a single itinerary with embedded tour and location)
+
 class SingleItinerarySerializer(serializers.ModelSerializer):
     tour = TourSerializer()  # Include tour details
     location = LocationSerializer(source='tour.location')  # Embed the location of the tour
@@ -40,7 +41,7 @@ class SingleItinerarySerializer(serializers.ModelSerializer):
         fields = ('id', 'user_id', 'tour', 'location', 'completed')
 
 
-# Itinerary ViewSet (handles CRUD operations for itineraries)
+
 class ItineraryView(ViewSet):
     def retrieve(self, request, pk):
         """Retrieve a single itinerary with tour and location details"""
