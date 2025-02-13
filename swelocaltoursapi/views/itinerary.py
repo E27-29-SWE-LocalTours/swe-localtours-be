@@ -70,11 +70,11 @@ class ItineraryView(ViewSet):
     def create(self, request):
         """Create a new itinerary"""
         try:
-            user = User.objects.get(pk=request.data["user_id"])
+            user_id = User.objects.get(pk=request.data["user_id"])
             tour = Tour.objects.get(pk=request.data["tour"])
 
             itinerary = Itinerary.objects.create(
-                user=user, 
+                user_id=user_id, 
                 uid=request.data["uid"],  
                 tour=tour,
                 completed=request.data.get("completed", False)
