@@ -5,7 +5,8 @@
         "fields": {
             "user_id": "1",
             "tour": "1",
-            "completed": false
+            "completed": false,
+            "uid": "user123"
         }
     }   
 ]

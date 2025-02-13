@@ -8,3 +8,4 @@ class Itinerary(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='itineraries' )
     tour = models.ForeignKey(Tour, on_delete=models.CASCADE, related_name='itineraries')
     completed = models.BooleanField(default=False)
+    uid = models.CharField(max_length=50) 
